@@ -1,10 +1,17 @@
 var socket = io();
-user_id = Math.floor(Math.random()*1000)
+var user_id;
+var role;
+
+socket.on('connect', () => {
+    console.log('Connected with ID:', socket.id); // This will log the client's unique socket ID
+    user_id = socket.id;
+});
+
+socket.on('play_role', function(msg){
+    console.log(msg);
+    role = msg;
+})
 socket.emit('id', (user_id).toString())
-function send(){
-    socket.emit('chat message', "aasd");
-    console.log()
-}
 
 socket.on('user_count', function(msg) {
     console.log(msg);
