@@ -12,18 +12,22 @@ players = []
 
 io.on('connection', (socket) => {
     console.log(`New client connected: ${socket.id}`);
+    players.push(socket.id)
+    console.log(players)
+
+    setTimeout(() => {
+        if (players[0]) {
+            io.to(players[0]).emit('automaticMessage', 'Hello, first client! This message is sent automatically.');
+        }
+    }, 5000); // Sends the message after 5 seconds as an example
+
+    
     if (players.length < 2) {
         socket.emit('play_role', 'player');
     }
     else{
         socket.emit('play_role', 'viewer');
     }
-
-    socket.on('id', (id) =>{
-        console.log('a user connected, id: ' + id);
-        players.push(id)
-        io.emit('user_count', players.length.toString())
-    })
 
 
 
