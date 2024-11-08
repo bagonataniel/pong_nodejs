@@ -78,3 +78,7 @@ document.addEventListener('keydown', function(event) {
             break;
     }
 });
+
+function clearUsers(){
+    socket.emit('clearUsers', user_id)
+}
