@@ -30,9 +30,6 @@ function sendGameStateUpdates() {
     if (gameState.players.length >= 2) {
         moveBall();
     }
-    socket.on('clearUsers', (msg) =>{
-        gameState.players = gameState.players.filter(player => player.id === msg);
-    })
 }
 
 // Function to update game state every 100ms
@@ -88,6 +85,10 @@ io.on('connection', (socket) => {
     else{
         console.log("waiting for one or more players")
     }
+
+    socket.on('clearUsers', (msg) =>{
+        gameState.players = gameState.players.filter(player => player.id === msg);
+    })
 
     socket.emit('gameState', gameState);
 
