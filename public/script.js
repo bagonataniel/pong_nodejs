@@ -2,46 +2,56 @@ var socket = io();
 var role;
 var user_id;
 
-socket.on('movement', function(msg){
-    console.log(msg)
-})
+const player = document.querySelector(".control");
+const right = document.querySelector(".right")
+const left = document.querySelector(".left")
+const ball = document.querySelector(".ball")
 
 socket.on('automaticMessage', function(msg){
     console.log(msg);
     user_id = msg;
 })
 
+
+
 socket.on('play_role', function(msg){
     console.log(msg);
     role = msg;
+    if (role == "left") {
+        left.classList.add("control")
+    }
+    else if(role == "right"){
+        right.classList.add("control")
+    }
+    else{
+        alert("You are viewer!");
+    }
 })
 
-
+// sends data when the user leaves
 window.addEventListener('unload',()=>{
     socket.emit('user_left', user_id.toString());
 })
 
 
-const player = document.querySelector(".control");
-const right = document.querySelector(".right")
-const left = document.querySelector(".left")
-
 socket.on('gameState', function(msg){
-    left_player = "";
-    right_player = "";
-    for (let index = 0; index < msg.playerId.length; index++) {
-        if (msg.playerId[index].role == "left") {
-            left_player = msg.playerId
+    for (let index = 0; index < msg.players.length; index++) {
+        if (msg.players[index].role == "left") {
+            left.style.top = msg.players[index].y+"%"
+        }
+        else if(msg.players[index].role == "right"){
+            right.style.top = msg.players[index].y+"%"
         }
     }
-    playerY = msg.players[user_id].y
-    left.style.top = msg.players[msg.playerId["left"]].y+"px"
+    console.log(msg.ballposition)
+    ball.style.left = msg.ballposition.x+"%";
+    ball.style.top = msg.ballposition.y+"%";
 })
 
-let playerY = 100; // Starting Y position
+let playerY = 10; // Starting Y position
 
 // Set player speed
-const speed = 50;
+const speed = 10;
 
 // Key press handler
 document.addEventListener('keydown', function(event) {
