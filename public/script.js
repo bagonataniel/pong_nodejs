@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io("https://pong-nodejs.onrender.com");
 var role;
 var user_id;
 

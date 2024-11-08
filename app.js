@@ -1,12 +1,22 @@
 const express = require('express');
-const path = require("path")
-const app = express();
+const path = require("path");
 const http = require('http');
-const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+
+const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Create HTTP server
+const server = http.createServer(app);
+
+// Initialize Socket.io server with the HTTP server
+const io = new Server(server, {
+  cors: {
+    origin: "https://bago-pong.netlify.app", // Update with your Netlify frontend URL
+    methods: ["GET", "POST"],
+  },
+});
 
 // Game state (example)
 let gameState = {
