@@ -61,11 +61,11 @@ function moveBall(){
     }
     /* also */
     if (gameState.ballposition.y+5 >= 100) {
-        ballspeed.y = -(Math.random() + 0.5)
+        ballspeed.y = -(Math.random() * 1.2)
     }
     /* felso */
     if (gameState.ballposition.y <= 0) {
-        ballspeed.y = Math.abs(Math.random() + 0.5)
+        ballspeed.y = Math.abs(Math.random() * 1.2)
     }
 }
 
