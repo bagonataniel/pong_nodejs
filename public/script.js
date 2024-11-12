@@ -35,6 +35,7 @@ window.addEventListener('unload',()=>{
 
 
 socket.on('gameState', function(msg){
+    console.log(msg.ballspeed)
     for (let index = 0; index < msg.players.length; index++) {
         if (msg.players[index].role == "left") {
             left.style.top = msg.players[index].y+"%"

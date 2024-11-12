@@ -59,7 +59,7 @@ function moveBall(){
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
         ballspeed.x = -(Math.random() * 1.5)
     }
-    if (gameState.ballposition.y >= 100) {
+    if (gameState.ballposition.y+5 >= 100) {
         ballspeed.y = -(Math.random() * 1.5)
     }
     if (gameState.ballposition.y <= 0) {
