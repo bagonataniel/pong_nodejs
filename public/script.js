@@ -43,7 +43,6 @@ socket.on('gameState', function(msg){
             right.style.top = msg.players[index].y+"%"
         }
     }
-    console.log(msg.ballposition)
     ball.style.left = msg.ballposition.x+"%";
     ball.style.top = msg.ballposition.y+"%";
 })

@@ -59,8 +59,11 @@ function moveBall(){
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
         ballspeed.x = -(Math.random() * 1.5)
     }
-    if (gameState.ballposition.y >= 100 || gameState.ballposition.y <= 0) {
+    if (gameState.ballposition.y >= 100) {
         ballspeed.y = -(Math.random() * 1.5)
+    }
+    if (gameState.ballposition.y <= 0) {
+        ballspeed.y = Math.abs(Math.random() * 1.5)
     }
 }
 
@@ -91,6 +94,7 @@ io.on('connection', (socket) => {
 
     socket.on('clearUsers', (msg) =>{
         gameState.players = gameState.players.filter(player => player.id === msg);
+        gameState.ballposition = {x: 10, y: 10}
     })
 
     socket.emit('gameState', gameState);
