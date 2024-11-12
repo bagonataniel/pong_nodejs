@@ -52,12 +52,15 @@ function moveBall(){
     /* jobb oldal */
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
     && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
-        ballspeed = -ballspeed
+        ballspeed = -Math.random()
     }
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed = -ballspeed
+        ballspeed = -Math.random()
+    }
+    if (gameState.ballposition.y >= 100 || gameState.ballposition.y <= 0) {
+        ballspeed = -Math.random()
     }
 }
 
