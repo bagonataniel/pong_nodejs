@@ -57,15 +57,15 @@ function moveBall(){
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed.x = -(Math.random() * 1.2)
+        ballspeed.x = Math.abs(Math.random() * 1.2)
     }
     /* also */
     if (gameState.ballposition.y+5 >= 100) {
-        ballspeed.y = -(Math.random() * 1.2)
+        ballspeed.y = -(Math.random() + 0.5)
     }
     /* felso */
     if (gameState.ballposition.y <= 0) {
-        ballspeed.y = Math.abs(Math.random() * 1.2)
+        ballspeed.y = Math.abs(Math.random() + 0.5)
     }
 }
 
