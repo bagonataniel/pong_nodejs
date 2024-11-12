@@ -23,7 +23,7 @@ let gameState = {
     players: [],
     ballposition : {x: 10, y: 10}
 };
-ballspeed = 0.5;
+ballspeed = {x: 0.5, y: 0.5};
 
 function sendGameStateUpdates() {
     io.emit('gameState', gameState);  // Broadcast the updated game state
@@ -46,21 +46,21 @@ function updatePlayerMovement(socket) {
 
 function moveBall(){
     gameState.ballposition = {
-        x: gameState.ballposition.x+ballspeed,
-        y: gameState.ballposition.y+(ballspeed/2)
+        x: gameState.ballposition.x+ballspeed.x,
+        y: gameState.ballposition.y+(ballspeed.y)
     }
     /* jobb oldal */
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
     && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
-        ballspeed = -Math.random()
+        ballspeed.x = -(Math.random() * 1.5)
     }
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed = -Math.random()
+        ballspeed.x = -(Math.random() * 1.5)
     }
     if (gameState.ballposition.y >= 100 || gameState.ballposition.y <= 0) {
-        ballspeed = -Math.random()
+        ballspeed.y = -(Math.random() * 1.5)
     }
 }
 
