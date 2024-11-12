@@ -52,18 +52,20 @@ function moveBall(){
     /* jobb oldal */
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
     && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
-        ballspeed.x = -(Math.random() * 1.5)
+        ballspeed.x = -(Math.random() * 1.2)
     }
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed.x = -(Math.random() * 1.5)
+        ballspeed.x = -(Math.random() * 1.2)
     }
+    /* also */
     if (gameState.ballposition.y+5 >= 100) {
-        ballspeed.y = -(Math.random() * 1.5)
+        ballspeed.y = -(Math.random() * 1.2)
     }
+    /* felso */
     if (gameState.ballposition.y <= 0) {
-        ballspeed.y = Math.abs(Math.random() * 1.5)
+        ballspeed.y = Math.abs(Math.random() * 1.2)
     }
 }
 
@@ -95,6 +97,7 @@ io.on('connection', (socket) => {
     socket.on('clearUsers', (msg) =>{
         gameState.players = gameState.players.filter(player => player.id === msg);
         gameState.ballposition = {x: 10, y: 10}
+        gameState.ballspeed = {x: 0.5, y: 0.5}
     })
 
     socket.emit('gameState', gameState);
