@@ -64,7 +64,7 @@ function moveBall(){
             gameState.score++;
         }
         /* also */
-        if (gameState.ballposition.y+5 >= 100) {
+        if (gameState.ballposition.y+10 >= 100) {
             ballspeed.y = -(Math.random() + 1)
         }
         /* felso */
