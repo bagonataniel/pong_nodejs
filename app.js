@@ -18,10 +18,10 @@ const io = new Server(server, {
   },
 });
 
-// Game state (example)
 let gameState = {
     players: [],
-    ballposition : {x: 10, y: 10}
+    ballposition : {x: 10, y: 10},
+    score : 0
 };
 ballspeed = {x: 0.5, y: 0.5};
 
@@ -53,11 +53,13 @@ function moveBall(){
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
     && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
         ballspeed.x = -(Math.random() + 1)
+        gameState.score++;
     }
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
         ballspeed.x = Math.abs(Math.random() + 1)
+        gameState.score++;
     }
     /* also */
     if (gameState.ballposition.y+5 >= 100) {
@@ -98,6 +100,7 @@ io.on('connection', (socket) => {
         gameState.players = gameState.players.filter(player => player.id === msg);
         gameState.ballposition = {x: 10, y: 10}
         gameState.ballspeed = {x: 0.5, y: 0.5}
+        gameState.score = 0;
     })
 
     socket.emit('gameState', gameState);
@@ -105,14 +108,13 @@ io.on('connection', (socket) => {
     // Handle movement events for this player
     updatePlayerMovement(socket);
 
-
     socket.on('disconnect', function () {
         console.log("user left, id: " + socket.id);
         gameState.players = gameState.players.filter(player => player.id !== socket.id);
     });
 });
 
-setInterval(sendGameStateUpdates, 17); // 33ms (around 30fps) interval for the loop
+setInterval(sendGameStateUpdates, 33); // 33ms (around 30fps) interval for the loop
 
 // Server indítása
 const PORT = process.env.PORT || 3000;

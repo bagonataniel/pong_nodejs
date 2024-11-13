@@ -6,13 +6,12 @@ const player = document.querySelector(".control");
 const right = document.querySelector(".right")
 const left = document.querySelector(".left")
 const ball = document.querySelector(".ball")
+const score = document.querySelector(".score")
 
 socket.on('automaticMessage', function(msg){
     console.log(msg);
     user_id = msg;
 })
-
-
 
 socket.on('play_role', function(msg){
     console.log(msg);
@@ -28,12 +27,6 @@ socket.on('play_role', function(msg){
     }
 })
 
-// sends data when the user leaves
-window.addEventListener('unload',()=>{
-    socket.emit('user_left', user_id.toString());
-})
-
-
 socket.on('gameState', function(msg){
     console.log(msg.ballspeed)
     for (let index = 0; index < msg.players.length; index++) {
@@ -46,6 +39,7 @@ socket.on('gameState', function(msg){
     }
     ball.style.left = msg.ballposition.x+"%";
     ball.style.top = msg.ballposition.y+"%";
+    score.innerText = msg.score;
 })
 
 let playerY = 10; // Starting Y position
