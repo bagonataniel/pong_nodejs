@@ -112,7 +112,7 @@ io.on('connection', (socket) => {
     });
 });
 
-setInterval(sendGameStateUpdates, 33); // 33ms (around 30fps) interval for the loop
+setInterval(sendGameStateUpdates, 17); // 33ms (around 30fps) interval for the loop
 
 // Server indítása
 const PORT = process.env.PORT || 3000;
