@@ -1,4 +1,4 @@
-import { PlayerOverflowHandling } from './local_scripts.js';
+// import { PlayerOverflowHandling } from './local_scripts.js';
 
 var socket = io("https://pong-nodejs.onrender.com");
 var role;
