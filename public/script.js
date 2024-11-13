@@ -1,3 +1,5 @@
+import { PlayerOverflowHandling } from './local_scripts.js';
+
 var socket = io("https://pong-nodejs.onrender.com");
 var role;
 var user_id;
@@ -46,12 +48,14 @@ document.addEventListener('keydown', function(event) {
             playerY -= speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
+            PlayerOverflowHandling()
             break;
         case 's':
         case 'ArrowDown':
             playerY += speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
+            PlayerOverflowHandling()
             break;
     }
 });
