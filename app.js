@@ -51,30 +51,30 @@ function moveBall(){
             x: gameState.ballposition.x+ballspeed.x,
             y: gameState.ballposition.y+(ballspeed.y)
         }
-    }
-    /* jobb oldal */
-    if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
-    && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
-        ballspeed.x = -(Math.random() + 1)
-        gameState.score++;
-    }
-    /*bal oldal*/
-    if(gameState.ballposition.x <= 1 /* jobb oldal */&& gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
-            && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed.x = Math.abs(Math.random() + 1)
-        gameState.score++;
-    }
-    /* also */
-    if (gameState.ballposition.y+5 >= 100) {
-        ballspeed.y = -(Math.random() + 1)
-    }
-    /* felso */
-    if (gameState.ballposition.y <= 0) {
-        ballspeed.y = Math.abs(Math.random() + 1)
-    }
+        /* jobb oldal */
+        if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
+        && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
+            ballspeed.x = -(Math.random() + 1)
+            gameState.score++;
+        }
+        /*bal oldal*/
+        if(gameState.ballposition.x <= 1 /* jobb oldal */&& gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
+                && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
+            ballspeed.x = Math.abs(Math.random() + 1)
+            gameState.score++;
+        }
+        /* also */
+        if (gameState.ballposition.y+5 >= 100) {
+            ballspeed.y = -(Math.random() + 1)
+        }
+        /* felso */
+        if (gameState.ballposition.y <= 0) {
+            ballspeed.y = Math.abs(Math.random() + 1)
+        }
 
-    if (gameState.ballposition.x < -10 || gameState.ballposition.x+5 > 105 ) {
-        gameState.running = false;
+        if (gameState.ballposition.x < -10 || gameState.ballposition.x+5 > 105 ) {
+            gameState.running = false;
+        }
     }
 }
 
