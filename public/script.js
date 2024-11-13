@@ -7,6 +7,8 @@ const right = document.querySelector(".right")
 const left = document.querySelector(".left")
 const ball = document.querySelector(".ball")
 const score = document.querySelector(".score")
+let playerY = 10; // Starting Y position
+const speed = 10; // Set player speed
 
 socket.on('automaticMessage', function(msg){
     console.log(msg);
@@ -16,15 +18,9 @@ socket.on('automaticMessage', function(msg){
 socket.on('play_role', function(msg){
     console.log(msg);
     role = msg;
-    if (role == "left") {
-        left.classList.add("control")
-    }
-    else if(role == "right"){
-        right.classList.add("control")
-    }
-    else{
-        alert("You are viewer!");
-    }
+    if (role == "left") {left.classList.add("control")}
+    else if(role == "right"){right.classList.add("control")}
+    else{alert("You are viewer!");}
 })
 
 socket.on('gameState', function(msg){
@@ -42,30 +38,17 @@ socket.on('gameState', function(msg){
     score.innerText = msg.score;
 })
 
-let playerY = 10; // Starting Y position
-
-// Set player speed
-const speed = 10;
-
 // Key press handler
 document.addEventListener('keydown', function(event) {
     switch(event.key) {
+        case 'w':
         case 'ArrowUp':
             playerY -= speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
             break;
-        case 'ArrowDown':
-            playerY += speed;
-            userData = {user_id, playerY}
-            socket.emit('movement', userData)
-            break;
-        case 'w':
-            playerY -= speed;
-            userData = {user_id, playerY}
-            socket.emit('movement', userData)
-            break;
         case 's':
+        case 'ArrowDown':
             playerY += speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
