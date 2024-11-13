@@ -105,10 +105,11 @@ io.on('connection', (socket) => {
     // Handle movement events for this player
     updatePlayerMovement(socket);
 
-    io.on('disconnect', (socket) =>{
+
+    socket.on('disconnect', function () {
         console.log("user left, id: " + socket.id);
         gameState.players = gameState.players.filter(player => player.id !== socket.id);
-    })
+    });
 });
 
 setInterval(sendGameStateUpdates, 33); // 33ms (around 30fps) interval for the loop
