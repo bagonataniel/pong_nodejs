@@ -52,20 +52,20 @@ function moveBall(){
     /* jobb oldal */
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
     && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
-        ballspeed.x = -(Math.random() * 1.2)
+        ballspeed.x = -(Math.random() + 1)
     }
     /*bal oldal*/
     if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
-        ballspeed.x = Math.abs(Math.random() * 1.2)
+        ballspeed.x = Math.abs(Math.random() + 1)
     }
     /* also */
     if (gameState.ballposition.y+5 >= 100) {
-        ballspeed.y = -(Math.random() * 1.2)
+        ballspeed.y = -(Math.random() + 1)
     }
     /* felso */
     if (gameState.ballposition.y <= 0) {
-        ballspeed.y = Math.abs(Math.random() * 1.2)
+        ballspeed.y = Math.abs(Math.random() + 1)
     }
 }
 
@@ -105,9 +105,9 @@ io.on('connection', (socket) => {
     // Handle movement events for this player
     updatePlayerMovement(socket);
 
-    socket.on('user_left', (msg) =>{
-        console.log("user left, id: " + msg);
-        gameState.players = gameState.players.filter(player => player.id !== msg);
+    io.on('disconnect', (socket) =>{
+        console.log("user left, id: " + socket.id);
+        gameState.players = gameState.players.filter(player => player.id !== socket.id);
     })
 });
 
