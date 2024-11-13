@@ -21,7 +21,8 @@ const io = new Server(server, {
 let gameState = {
     players: [],
     ballposition : {x: 10, y: 10},
-    score : 0
+    score : 0,
+    running : true
 };
 ballspeed = {x: 0.5, y: 0.5};
 
@@ -45,9 +46,11 @@ function updatePlayerMovement(socket) {
 }
 
 function moveBall(){
-    gameState.ballposition = {
-        x: gameState.ballposition.x+ballspeed.x,
-        y: gameState.ballposition.y+(ballspeed.y)
+    if (gameState.running) {
+        gameState.ballposition = {
+            x: gameState.ballposition.x+ballspeed.x,
+            y: gameState.ballposition.y+(ballspeed.y)
+        }
     }
     /* jobb oldal */
     if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
@@ -56,7 +59,7 @@ function moveBall(){
         gameState.score++;
     }
     /*bal oldal*/
-    if(gameState.ballposition.x <= 1 /* jobb oldal */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
+    if(gameState.ballposition.x <= 1 /* jobb oldal */&& gameState.ballposition.y >= gameState.players.find(player => player.role === 'left').y /* felso */
             && gameState.ballposition.y <= gameState.players.find(player => player.role === 'left').y+30 /* also */){
         ballspeed.x = Math.abs(Math.random() + 1)
         gameState.score++;
@@ -68,6 +71,10 @@ function moveBall(){
     /* felso */
     if (gameState.ballposition.y <= 0) {
         ballspeed.y = Math.abs(Math.random() + 1)
+    }
+
+    if (gameState.ballposition.x < -10 || gameState.ballposition.x+5 > 105 ) {
+        gameState.running = false;
     }
 }
 
@@ -101,6 +108,7 @@ io.on('connection', (socket) => {
         gameState.ballposition = {x: 10, y: 10}
         gameState.ballspeed = {x: 0.5, y: 0.5}
         gameState.score = 0;
+        gameState.running = true;
     })
 
     socket.emit('gameState', gameState);
