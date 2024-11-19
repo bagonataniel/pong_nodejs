@@ -52,7 +52,7 @@ function moveBall(){
             y: gameState.ballposition.y+(ballspeed.y)
         }
         /* jobb oldal */
-        if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y >= gameState.players.find(player => player.role === 'right').y /* felso */
+        if (gameState.ballposition.x+5 >= 99 /* bal oldala */ && gameState.ballposition.y+2.5 >= gameState.players.find(player => player.role === 'right').y /* felso */
         && gameState.ballposition.y <= gameState.players.find(player => player.role === 'right').y+30 /* also */) {
             ballspeed.x = -(Math.random() + 1)
             gameState.score++;
