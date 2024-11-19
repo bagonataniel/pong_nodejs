@@ -47,33 +47,21 @@ document.addEventListener('keydown', function(event) {
             playerY -= speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
-            if (player.style.top < 0) {
-                document.getElementById("up").classList.add("ct-animate-blink")
-            }
-            else{
-                document.getElementById("up").classList.remove("ct-animate-blink")
-            }
-            if (player.style.top > 100) {
-                document.getElementById("down").classList.add("ct-animate-blink")
-            }
-            else{
-                document.getElementById("down").classList.remove("ct-animate-blink")
-            }
+            if (parseInt(player.style.top) < 0) {document.getElementById("up").classList.add("ct-animate-blink")}
+            else{document.getElementById("up").classList.remove("ct-animate-blink")}
+            if (parseInt(player.style.top) > 100) {document.getElementById("down").classList.add("ct-animate-blink")}
+            else{document.getElementById("down").classList.remove("ct-animate-blink")}
             break;
         case 's':
         case 'ArrowDown':
             playerY += speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
-            if (player.style.position < 0) {
-                console.log("felul van")
-            }
-            if (player.style.position > 100) {
-                console.log("alul van");
-            }
+            if (parseInt(player.style.top) < 0) {document.getElementById("up").classList.add("ct-animate-blink")}
+            else{document.getElementById("up").classList.remove("ct-animate-blink")}
+            if (parseInt(player.style.top) > 100) {document.getElementById("down").classList.add("ct-animate-blink")}
+            else{document.getElementById("down").classList.remove("ct-animate-blink")}
             break;
-        case 'u':
-            console.log(add(10,10))
     }
 });
 
