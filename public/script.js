@@ -47,13 +47,13 @@ document.addEventListener('keydown', function(event) {
             playerY -= speed;
             userData = {user_id, playerY}
             socket.emit('movement', userData)
-            if (player.style.position < 0) {
+            if (player.style.top < 0) {
                 document.getElementById("up").classList.add("ct-animate-blink")
             }
             else{
                 document.getElementById("up").classList.remove("ct-animate-blink")
             }
-            if (player.style.position > 100) {
+            if (player.style.top > 100) {
                 document.getElementById("down").classList.add("ct-animate-blink")
             }
             else{
