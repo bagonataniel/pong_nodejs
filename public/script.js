@@ -18,8 +18,16 @@ socket.on('automaticMessage', function(msg){
 socket.on('play_role', function(msg){
     console.log(msg);
     role = msg;
-    if (role == "left") {left.classList.add("control")}
-    else if(role == "right"){right.classList.add("control")}
+    if (role == "left") {
+        left.classList.add("control")
+        document.getElementById("up").style.left = 100+"px";
+        document.getElementById("down").style.left = 100+"px";
+    }
+    else if(role == "right"){
+        right.classList.add("control")
+        document.getElementById("up").style.right = 100+"px";
+        document.getElementById("down").style.right = 100+"px";
+    }
     else{alert("You are viewer!");}
     player = document.querySelector(".control")
 })
@@ -67,4 +75,7 @@ document.addEventListener('keydown', function(event) {
 
 function clearUsers(){
     socket.emit('clearUsers', user_id)
+}
+function restartGame(){
+    socket.emit('restart')
 }

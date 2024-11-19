@@ -43,13 +43,14 @@ body{
     height: 100px;
     color: white;
     position: absolute;
-    right: 100px;
     opacity: 0;
 }
 #up{
+    position: absolute;
     top: 10px;
 }
 #down{
+    position: absolute;
     bottom: 10px;
 }
 

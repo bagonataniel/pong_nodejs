@@ -111,6 +111,15 @@ io.on('connection', (socket) => {
         gameState.running = true;
     })
 
+    socket.on('restart', () => {
+        console.log('Restarting...');
+        gameState.ballposition = {x: 10, y: 10}
+        gameState.ballspeed = {x: 0.5, y: 0.5}
+        gameState.score = 0;
+        gameState.running = true;
+      });
+
+
     socket.emit('gameState', gameState);
 
     // Handle movement events for this player
