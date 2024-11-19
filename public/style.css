@@ -37,3 +37,29 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.arrow{
+    width: 100px;
+    height: 100px;
+    color: white;
+    position: absolute;
+    right: 100px;
+    opacity: 0;
+}
+#up{
+    top: 10px;
+}
+#down{
+    bottom: 10px;
+}
+
+.ct-animate-blink {
+    animation: blink 1.5s infinite;
+    animation-fill-mode: both;
+    }
+ 
+ @keyframes blink {
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+    100% { opacity: 0 }
+    }
