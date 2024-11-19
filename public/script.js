@@ -2,7 +2,7 @@ var socket = io("https://pong-nodejs.onrender.com");
 var role;
 var user_id;
 
-const player = document.querySelector(".control");
+var player = document.querySelector(".control");
 const right = document.querySelector(".right")
 const left = document.querySelector(".left")
 const ball = document.querySelector(".ball")
@@ -21,6 +21,7 @@ socket.on('play_role', function(msg){
     if (role == "left") {left.classList.add("control")}
     else if(role == "right"){right.classList.add("control")}
     else{alert("You are viewer!");}
+    player = document.querySelector(".control")
 })
 
 socket.on('gameState', function(msg){
