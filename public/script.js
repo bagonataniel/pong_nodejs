@@ -41,6 +41,9 @@ socket.on('gameState', function(msg){
             right.style.top = msg.players[index].y+"%"
         }
     }
+    if (!msg.running) {
+        document.querySelector(".gameover").style.display = "block";
+    }
     ball.style.left = msg.ballposition.x+"%";
     ball.style.top = msg.ballposition.y+"%";
     score.innerText = msg.score;
@@ -77,4 +80,5 @@ function clearUsers(){
 }
 function restartGame(){
     socket.emit('restart')
+    document.querySelector(".gameover").sytle.display = "none";
 }
