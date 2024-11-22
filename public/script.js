@@ -43,7 +43,7 @@ socket.on('gameState', function(msg){
         if (!msg.running && index == 0) {
             document.querySelector(".gameover").style.display = "block";
         }
-        if (running) {
+        if (msg.running) {
             document.querySelector(".gameover").style.display = "none";
         }
     }
