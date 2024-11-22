@@ -79,6 +79,6 @@ function clearUsers(){
     socket.emit('clearUsers', user_id)
 }
 function restartGame(){
+    document.querySelector(".gameover").style.display = "none";
     socket.emit('restart')
-    document.querySelector(".gameover").sytle.display = "none";
 }
