@@ -40,9 +40,12 @@ socket.on('gameState', function(msg){
         else if(msg.players[index].role == "right"){
             right.style.top = msg.players[index].y+"%"
         }
-    }
-    if (!msg.running) {
-        document.querySelector(".gameover").style.display = "block";
+        if (!msg.running && index == 0) {
+            document.querySelector(".gameover").style.display = "block";
+        }
+        if (running) {
+            document.querySelector(".gameover").style.display = "none";
+        }
     }
     ball.style.left = msg.ballposition.x+"%";
     ball.style.top = msg.ballposition.y+"%";
